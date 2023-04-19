@@ -9,6 +9,9 @@ public class ListaProdutosUtils
     //criando variaveis estaticas para serem usadas nos metodos
     static Scanner scanner = new Scanner(System.in);
     static String empresa;
+    static String nomePromocao;
+    static String precoPromocao;
+    static int posicao;
     static List<Produto> listaDeProdutos;
 
     //criando o metodo que solicita nome da empresa e preenche a lista com os produtos
@@ -66,12 +69,13 @@ public class ListaProdutosUtils
             System.out.println(produto.getNome() + " - R$ " + produto.getPreco());
         }
     }
+
     //criando o metodo que controla o input do usuario
     public static void comando()
     {
-        System.out.println("Digite Promo ou Exit");
         while (true)
         {
+            System.out.println("Digite Promo ou Exit");
             String comando = scanner.next();
             if (comando.equals("Exit"))
             {
@@ -80,8 +84,38 @@ public class ListaProdutosUtils
             }
             else if (comando.equals("Promo"))
             {
-                System.out.println("chama método para adicionar elemento em promocao");
+                System.out.println("Digite a posição do produto para adcionar a promoção");
+                posicao = scanner.nextInt();
+                if(posicao <= 0 || posicao > listaDeProdutos.size())
+                {
+                    System.out.println("Posição inválida, tente novamente.");
+                }
+                else
+                {
+                    Produto produto =  listaDeProdutos.remove(posicao - 1);
+                    nomePromocao = produto.getNome().toUpperCase();
+                    precoPromocao = produto.getPreco();
+                    System.out.println("Produto " + produto.getNome() + " adcionada a promoção");
+                    imprimePromo(listaDeProdutos, empresa, nomePromocao, precoPromocao);
+                }
             }
+        }
+    }
+
+    //Criando metodo que imprime a lista com o produto promoção em destaque
+    public static void imprimePromo(List<Produto> listaDeProdutos, String empresa, String nomePromocao, String precoPromocao)
+    {
+        System.out.println();
+        System.out.println("======================");
+        System.out.println("Empresa: " + empresa);
+        System.out.println("======================");
+        System.out.println("PROMOÇÃO: " + nomePromocao + " - R$ "  + precoPromocao);
+        System.out.println();
+
+        for (int i = 0; i < listaDeProdutos.size(); i++)
+        {
+            Produto produto = listaDeProdutos.get(i);
+            System.out.println(produto.getNome() + " - R$ " + produto.getPreco());
         }
     }
 }

@@ -1,0 +1,5 @@
+FACULDADE CESUSC - ADS31
+Prof. Marcos Marques - Orientação Objetos
+Participantes: Gabriel Rizzi, Cássio Domingues.
+
+Trabalho N1 sistema embarcado em Java.
